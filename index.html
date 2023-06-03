@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Омельченко Максим</title>
+  <style>
+    /* Стили для внешнего вида сайта */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #f2f2f2;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 10px;
+      color: #333;
+      text-decoration: none;
+    }
+    section {
+      padding: 20px;
+    }
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Омельченко Максим</h1>
+  </header>
+
+  <nav>
+    <a href="#about">Обо мне</a>
+    <a href="#education">Образование</a>
+    <a href="#skills">Навыки</a>
+    <a href="#contact">Контакты</a>
+    <a href="#dannye">Данные</a>
+  </nav>
+
+  <section id="about">
+    <h2>Обо мне</h2>
+    <p>Профессиональные навыки: </p>
+<p>— Опыт работы на должности экономиста — 5 лет. </p>
+<p>— Знание налогового законодательства, бухгалтерского и налогового учёта. </p>
+<p>— Навык разработки, внедрения и ведения управленческого учета.</p>
+<p>— Умение разрабатывать финансово-экономические модели.</p>
+<p>— Опыт анализа, планирования и регламентации финансово-хозяйственной деятельности.</p>
+<p>— Навык планирования и контроля исполнения бюджетов.</p>
+<p>— Знание видов себестоимости, методов ценообразования.</p>
+<p>— Опыт составления аналитических отчётов.</p>
+<p>Дополнительные сведения:</p>
+<p>Благодаря инициативности и целеустремлённости я постоянно стремлюсь к повышению эффективности работы, ищу возможности для её улучшения.</p>
+    <img src="photo.jpg" alt="Фотография Максима Омельченко">
+  </section>
+
+  <section id="education">
+    <h2>Образование</h2>
+    <p>Полное среднее</p>
+  </section>
+
+
+  <section id="skills">
+    <h2>Навыки</h2>
+    <p>
+        -Критическое мышление</p>
+        <p>-Социальный интеллект</p>
+        <p>-Креативность</p>
+        <p>-Информационная грамотность</p>
+        <p>-Цифровая грамотность</p>
+        <p>-Медиаграмотность</p>
+        <p>-Гибкость, готовность меняться</p>
+        <p>-Инициативность
+    </p>
+  </section>
+
+  <section id="contact">
+    <h2>Контакты</h2>
+    <p>oooooooo@mail.ru</p>
+    <p>+78005553535</p>
+  </section> 
+  
+  <section id="dannye">
+            <div class="main">
+                <h2>Получить данные</h2>
+                <button class="btn" onclick="myFunction()">Нажать для получения данных</button>
+                <ul id="demo"></ul>
+            </div>
+  </section> 
+    <script>
+        function autoRefresh() {
+              myFunction();
+        setTimeout(autoRefresh, 5000);
+      }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        function myFunction() {
+            (async () => {
+                let response = await fetch('https://kav-api.kovalev.team/servodrive/lastActualData?servoDriveId=1');
+                let el = document.getElementById('demo')
+                el.innerHTML = ""
+                let text = await response.text(); // прочитать тело ответа как текст
+                for (const [key, value] of Object.entries(JSON.parse(text)[0])) {
+                    const newEl = document.createElement("li")
+                    newEl.appendChild(document.createTextNode(`${key}: ${value}`))
+                    el.appendChild(newEl)
+                    await sleep(100)
+                }
+            })()
+        }
+        window.onload = function () {
+            autoRefresh();
+          };
+        
+    </script>
+
+  <footer>
+    <p>© 2023 Омельченко Максим</p>
+  </footer>
+</body>
+</html>
